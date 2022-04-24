@@ -1,14 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import './style.css'
-import template from './template.png'
 
+import './App.css';
+import Login from './Login/Login'
+import NavBar from './Common/style'
 function App() {
   return (
-      <div className="topnav">
-        <a href="#" className="align-left"><img className="align-left" src={template} alt="logo"/></a>
+      <div>
+        <NavBar></NavBar>
+        <Login></Login>
       </div>
-        
   );
 }
 
