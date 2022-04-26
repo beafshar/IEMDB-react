@@ -6,6 +6,10 @@ export const login_api = (data) => {
     return axios.post(`${server}/login`, {...data});
 }
 
+export const logout_api = () => {
+    return axios.get(`${server}/logout`);
+}
+
 export const signup_api = (data) => {
     return axios.post(`${server}/signup`, {...data});
 }
@@ -35,10 +39,41 @@ export const filter_movies_by_date = (date) => {
     return axios.get(`${server}/movies/filter_by_date/${date}`)
 }
 export const get_actor = (id) => {
-    // id = String(id)
-    // console.log(id)
     return axios.get(`${server}/actors/${id}`)
 }
+
+export const get_actor_movies = (id) => {
+    return axios.get(`${server}/actors/${id}/movies`)
+}
+
 export const get_movie_by_id = (id) => {
     return axios.get(`${server}/movies/${id}`)
+}
+
+export const get_movie_actors = (id) => {
+    return axios.get(`${server}/movies/${id}/actors`)
+}
+
+export const add_movie_to_watchlist = (id) => {
+    return axios.post(`${server}/movies/${id}/add_to_watchlist`)
+}
+
+export const rate_movie = (id, rating) => {
+    return axios.post(`${server}/movies/${id}/rate`, {rating})
+}
+
+export const get_comments = (id) => {
+    return axios.get(`${server}/movies/${id}/comments`)
+}
+
+export const comment_movie = (id, comment) => {
+    return axios.post(`${server}/movies/${id}/comment`, {comment})
+}
+
+export const like_comment = (id, comment_id) => {
+    return axios.post(`${server}/movies/${id}/${comment_id}/like`)
+}
+
+export const dislike_comment = (id, comment_id) => {
+    return axios.post(`${server}/movies/${id}/${comment_id}/dislike`)
 }
