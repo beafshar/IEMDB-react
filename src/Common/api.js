@@ -2,6 +2,11 @@ import axios from "axios";
 
 const server = "http://localhost:8080"
 
-export const login_api = ({username, password}) => {
-    return axios.post(`${server}/login`, {username: username, password: password});
+export const login_api = (data) => {
+    return axios.post(`${server}/login`, {...data});
 }
+
+export const signup_api = (data) => {
+    return axios.post(`${server}/signup`, {...data});
+}
+

@@ -2,19 +2,23 @@ import { useState } from "react";
 import template from '../Common/template.png'
 import './login.css'
 import {login_api} from "../Common/api";
+import { useNavigate } from "react-router-dom";
 
 
 
 function Login() {
-
+    const navigator = useNavigate();
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
     function submitName(e) {
+        console.log(username)
+        console.log(password)
         e.preventDefault();
         login_api({username, password})
             .then(res => {
                 console.log(res);
+                navigator("/movies")
             })
             .catch(err => {
                 console.log(err);
