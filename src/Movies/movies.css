@@ -6,13 +6,9 @@
 }
 
 .row {
-    display: -webkit-flex;
+    flex-direction: row;
     display: flex;
-    row-gap: 2px;
-    column-gap: 20px;
-    flex-basis: auto;
-    margin: 0px;
-    padding: 20px;
+    align-items: center;
 }
 @media (max-width: 800px) {
     .row {
@@ -29,6 +25,16 @@
     flex-basis: 10em;
     align-items: center;
     justify-content: center;
+}
+.rightalign {
+    width: fit-content;
+    height: auto;
+    position: center;
+    flex-basis: 10em;
+    justify-content: right;
+    float: right;
+    display: flex;
+    margin-left: 25em;
 }
 .column.side {
     -webkit-flex: 1;
@@ -50,8 +56,8 @@
     margin: 20px;
 }
 .cards img {
-    border-radius: 0px;
-    box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.5);
+    border-radius: 20px;
+    box-shadow: 3px 3px 8px 0 rgba(0,0,0,0.5);
     max-width: 23vw;
 }
 
@@ -71,11 +77,9 @@
     display: flex;
     row-gap: 2px;
     column-gap: 20px;
-    flex-basis: auto;
     margin: 30px;
     padding: 5px 30px;
     flex: 3;
-    width: content-box;
     background-color: #B12025;
     color: white;
     border-radius: 20px;
@@ -86,30 +90,23 @@
 }
 
 
-.topnav .searchBox {
-    position: absolute;
-    left: 50%;
-    transform:  translate(-50%,50%);
+.searchBox {
+    flex-direction: row;
     background: white;
-    height: fit-content;
     border-radius: 10px;
-    padding: 10px;
-    align-content: center;
-    justify-content: center;
+    padding: 0.5em;
+    width: 200px;
+    direction: rtl;
+    height: 40px;
 }
 
-.topnav ul {
+ul {
     justify-content: center;
     align-content: center;
     margin-top: -5px;
 }
 
-.topnav .searchBox > .searchInput {
-    width: 240px;
-    padding: 0 6px;
-}
-
-.topnav .searchButton {
+.searchButton {
     display: flex;
     color:  #B12025;
     width: 25px;
@@ -118,41 +115,56 @@
     background: white;
 }
 
-.topnav .searchInput {
+.searchInput {
     border: none;
     background: none;
     outline:none;
     float:left;
-    padding: 0;
     color: black;
     font-size: 16px;
+    direction: rtl;
+    width: 150px;
 }
 
 .dropdown.search {
     justify-content: center;
     align-content: center;
-    margin-left: 450px;
-    margin-top: 12px;
+    display: flex;
     background-color: white;
     color: black;
     border-radius: 10px;
-    width: 250px;
+    width: 200px;
     height: fit-content;
 }
 .dropdown-content.search {
     justify-content: center;
     align-content: center;
     margin-left: 80px;
-    margin-top: 10px;
+    margin-top: 40px;
 }
 
 .search-type {
     justify-content: center;
     align-content: center;
-    height: fit-content;
     width: fit-content;
     text-align: right;
     font-size: 0.95em;
-    margin-left: 35px;
-    margin-top: 0px;
+    padding-bottom: 2px;
+}
+
+.material-icons.mag{
+    height: fit-content;
+    direction: rtl;
+}
+
+.button.filter {
+    float: right;
+    background-color: #B12025;
+    display: flex;
+    color: white;
+    border: none;
+}
+
+.button.filter:hover {
+    background-color: darkred;
 }

@@ -7,15 +7,29 @@ import Signup from './Signup/signup'
 import Movies from './Movies/movies'
 function App() {
   return (
+
+
       <Router>
           <Routes>
 
-              <Route path="/" element={<Login></Login>}></Route>
-              <Route path="/login" element={<Login></Login>}></Route>
+              <Route path="/" element={
+                  <div>
+                  <NavBar></NavBar><Login></Login>
+                  </div>}></Route>
+              <Route path="/login" element={
+                  <div>
+                    <NavBar></NavBar><Login></Login>
+                  </div>
+                  }></Route>
 
               {/*<Route path="/signup" element={<Signup></Signup>}></Route>*/}
 
-              <Route path="/movies" element={<Movies></Movies>}></Route>
+              <Route path="/movies" element={
+                  <div>
+                      <Movies></Movies>
+                  </div>
+              }></Route>
+
 
               {/*<Route path='/movies/:id' element={<Moive></Moive>}></Route>*/}
 

@@ -16,7 +16,7 @@ function Login() {
         login_api({username, password})
             .then(res => {
                 console.log(res);
-                // navigator("/movies")
+                navigator("/movies")
             })
             .catch(err => {
                 console.log(err);
