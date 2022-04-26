@@ -10,3 +10,6 @@ export const signup_api = (data) => {
     return axios.post(`${server}/signup`, {...data});
 }
 
+export const get_movies = () => {
+    return axios.get(`${server}/movies`)
+}

@@ -12,13 +12,11 @@ function Login() {
     const [password, setPassword] = useState("")
 
     function submitName(e) {
-        console.log(username)
-        console.log(password)
         e.preventDefault();
         login_api({username, password})
             .then(res => {
                 console.log(res);
-                navigator("/movies")
+                // navigator("/movies")
             })
             .catch(err => {
                 console.log(err);

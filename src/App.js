@@ -4,6 +4,7 @@ import Login from './Login/Login'
 import NavBar from './Common/style'
 import React from "react";
 import Signup from './Signup/signup'
+import Movies from './Movies/movies'
 function App() {
   return (
       <Router>
@@ -12,9 +13,9 @@ function App() {
               <Route path="/" element={<Login></Login>}></Route>
               <Route path="/login" element={<Login></Login>}></Route>
 
-              <Route path="/signup" element={<Signup></Signup>}></Route>
+              {/*<Route path="/signup" element={<Signup></Signup>}></Route>*/}
 
-              {/*<Route path="/movies" element={<Movies></Movies>}></Route>*/}
+              <Route path="/movies" element={<Movies></Movies>}></Route>
 
               {/*<Route path='/movies/:id' element={<Moive></Moive>}></Route>*/}
 
