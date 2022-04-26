@@ -1,5 +1,5 @@
 import './movies.css'
-import '../Common/style'
+import '../Common/style.css'
 import '../Actor/actor'
 import userlogo from '../Common/user.png';
 import template from '../Common/template.png'

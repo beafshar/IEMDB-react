@@ -34,3 +34,11 @@ export const filter_movies_by_date = (date) => {
     date = String(date)
     return axios.get(`${server}/movies/filter_by_date/${date}`)
 }
+export const get_actor = (id) => {
+    // id = String(id)
+    // console.log(id)
+    return axios.get(`${server}/actors/${id}`)
+}
+export const get_movie_by_id = (id) => {
+    return axios.get(`${server}/movies/${id}`)
+}
