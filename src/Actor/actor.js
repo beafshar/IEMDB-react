@@ -4,7 +4,7 @@ import '../Actor/actor'
 
 import React, {useEffect, useState} from "react";
 import {
-    get_actor
+    get_actor, get_actor_movies
 } from '../Common/api'
 import {useNavigate, useParams} from "react-router-dom";
 
@@ -13,26 +13,19 @@ function Actor() {
     const [movies, setMovies] = useState([]);
     const [actor, setActor] = useState(null);
 
-    let { id } = useParams();
-    
-    function getActor() {
-        get_actor(id).then(response => {
-            console.log(response)
-            setActor(response.data)
-                console.log("-----------")
-        })
-            .catch(e => {
-                console.log(e)
-                console.log(e.response)
-                // toast.error("مشکلی در در دریافت اطلاعات از سرور پیش آمده است!")
+    let {id} = useParams();
+    useEffect(() => {
+        get_actor(id)
+            .then(actor => {
+                setActor(actor);
             })
-    }
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
 
-    function getActorMovies() {
 
-    }
     return (
-
         <div className="row">
             <div className="column side">
                 <img src={actor.image} alt="logo"/>
@@ -54,4 +47,5 @@ function Actor() {
         </div>
     )
 }
+
 export default Actor;
