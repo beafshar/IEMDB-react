@@ -141,6 +141,7 @@ ul {
     align-content: center;
     margin-left: 80px;
     margin-top: 40px;
+    border: none;
 }
 
 .search-type {
@@ -168,3 +169,4 @@ ul {
 .button.filter:hover {
     background-color: darkred;
 }
+
