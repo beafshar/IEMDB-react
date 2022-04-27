@@ -1,6 +1,6 @@
 import './movies.css'
 import '../Common/style.css'
-import '../Actor/actor'
+// import '../Actor/actor'
 import userlogo from '../Common/user.png';
 import template from '../Common/template.png'
 import React, {useEffect, useState} from "react";
@@ -162,9 +162,9 @@ function Movies() {
                                 movies.length > 0 ? movies.map((item, index) => (
                                     <li>
                                         <div className="container">
-                                            <a>
+                                            <a onClick={() => navigator(`/movies/${item.id}`)}>
                                                 <img className="image" src={item.image} alt="movie"
-                                                     onClick={() => navigator(`/movies/${item.id}`)}/>
+                                                     />
                                                 <div className="overlay">{item.name}</div>
                                             </a>
                                         </div>
