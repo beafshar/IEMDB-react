@@ -163,8 +163,7 @@ function Movies() {
                                     <li>
                                         <div className="container">
                                             <a onClick={() => navigator(`/movies/${item.id}`)}>
-                                                <img className="image" src={item.image} alt="movie"
-                                                     />
+                                                <img className="image" src={item.image} alt="movie"/>
                                                 <div className="overlay">{item.name}</div>
                                             </a>
                                         </div>
