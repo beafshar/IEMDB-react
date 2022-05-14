@@ -1,6 +1,5 @@
 import './movies.css'
 import '../Common/style.css'
-// import '../Actor/actor'
 import userlogo from '../Common/user.png';
 import template from '../Common/template.png'
 import React, {useEffect, useState} from "react";
@@ -102,7 +101,6 @@ function Movies() {
                 });
         }
         if (searchBy === "3") {
-            console.log(searchKey);
             filter_movies_by_date(searchKey)
                 .then(res => {
                     setMovies(res.data)

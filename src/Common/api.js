@@ -57,11 +57,12 @@ export const get_movie_actors = (id) => {
 }
 
 export const add_movie_to_watchlist = (id) => {
+    console.log("watchhhhhh",id)
     return axios.post(`${server}/movies/${id}/add_to_watchlist`)
 }
 
 export const rate_movie = (id, rating) => {
-    return axios.post(`${server}/movies/${id}/rate`, {rating})
+    return axios.post(`${server}/movies/${id}/rate`, {rating: rating})
 }
 
 export const get_comments = (id) => {
@@ -69,13 +70,21 @@ export const get_comments = (id) => {
 }
 
 export const comment_movie = (id, comment) => {
-    return axios.post(`${server}/movies/${id}/comment`, {comment})
+    return axios.post(`${server}/movies/${id}/comment`, comment.valueOf())
 }
 
 export const like_comment = (id, comment_id) => {
-    return axios.post(`${server}/movies/${id}/${comment_id}/like`)
+    return axios.get(`${server}/movies/${id}/${comment_id}/like`)
 }
 
 export const dislike_comment = (id, comment_id) => {
-    return axios.post(`${server}/movies/${id}/${comment_id}/dislike`)
+    return axios.get(`${server}/movies/${id}/${comment_id}/dislike`)
+}
+
+export const get_watchlist = () => {
+    return axios.get(`${server}/watchlist`)
+}
+
+export const get_recommendations = () => {
+    return axios.get(`${server}/watchlist/recommendations`)
 }

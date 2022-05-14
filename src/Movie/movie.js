@@ -1,10 +1,14 @@
 import './movie.css'
 import '../Common/style.css'
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {
-    get_movie_by_id,
+    add_movie_to_watchlist,
+    comment_movie,
+    dislike_comment,
+    get_comments,
     get_movie_actors,
-    get_comments
+    get_movie_by_id,
+    like_comment
 } from '../Common/api'
 import {useNavigate, useParams} from "react-router-dom";
 
@@ -13,6 +17,7 @@ function Movie() {
     const [movie, setMovie] = useState(null);
     const [comments, setComments] = useState([]);
     const [actors, setActors] = useState([]);
+    const [newComment, setNewComment] = useState('');
 
     const {id} = useParams();
 
@@ -20,7 +25,6 @@ function Movie() {
         get_movie_by_id(id)
             .then(res => {
                 setMovie(res.data)
-                console.log(movie)
             })
             .catch(e => {
                 console.log(e)
@@ -43,6 +47,36 @@ function Movie() {
             })
     }
 
+    function setNewCommentValue(e) {
+        setNewComment(e.target.value)
+        console.log(newComment)
+    }
+
+    function addComment(e) {
+        e.preventDefault();
+        comment_movie(id, newComment)
+            .then(r => {
+                setNewComment('')
+                var f = document.forms.myForm;
+                f.reset();
+                getData()
+            });
+    }
+
+    function likeComment(e) {
+        like_comment(id, e)
+            .then(r => {
+                getData()
+            });
+    }
+
+    function dislikeComment(e) {
+        dislike_comment(id, e)
+            .then(r => {
+                getData()
+            });
+    }
+
     return (
         <div>
             <div>{getData()}</div>
@@ -55,7 +89,7 @@ function Movie() {
                                     <img className="image movie" src={movie && movie.image} alt="movie"/>
                                 </div>
                                 <div className="column">
-                                    <button className="button add_to_watchlist">افزودن به لیست</button>
+                                    <button className="button add_to_watchlist" onClick={e => add_movie_to_watchlist(e)} >افزودن به لیست</button>
                                 </div>
                             </div>
                         </div>
@@ -108,11 +142,11 @@ function Movie() {
                         <div className="comment">
                             <dl>
                                 <dt dir="rtl">دیدگاه خود را اضافه کنید.</dt>
-                                    <form>
-                                        <input className="comment-text" type="text"/>
-                                        <button className="button submit">ثبت</button>
-                                    </form>
-                                    <dt dir="rtl"/>
+                                <form name="myForm">
+                                    <input className="comment-text" type="text" onChange={e => setNewCommentValue(e)}/>
+                                    <button className="button submit" onClick={e => addComment(e)}>ثبت</button>
+                                </form>
+                                <dt dir="rtl"/>
                             </dl>
                         </div>
                         {comments.length > 0 ? comments.map((item, index) => (
@@ -123,12 +157,12 @@ function Movie() {
                                         <table>
                                             <tr>
                                                 <th>
-                                                    <button className="like">
+                                                    <button className="like" onClick={e => likeComment(item.id)}>
                                                         <i className="fa fa-thumbs-o-up" aria-hidden="true"/>
                                                     </button>
                                                 </th>
                                                 <th>
-                                                    <button className="dislike">
+                                                    <button className="dislike" onClick={e => dislikeComment(item.id)}>
                                                         <i className="fa fa-thumbs-o-down" aria-hidden="true"/>
                                                     </button>
                                                 </th>

@@ -6,6 +6,7 @@ import React from "react";
 import Movies from './Movies/movies'
 import Actor from './Actor/actor'
 import Movie from './Movie/movie'
+import Watchlist from "./Watchlist/watchlist";
 
 function App() {
     return (
@@ -28,7 +29,7 @@ function App() {
                 }></Route>
                 <Route path='/movies/:id' element={<div><NavBar></NavBar><Movie></Movie></div>}></Route>
                 <Route path='/actors/:id' element={<div><NavBar></NavBar><Actor></Actor></div>}></Route>
-                {/*<Route path="/watchlist" element={<Watchlist></Watchlist>}></Route>*/}
+                <Route path="/watchlist" element={<div><Watchlist></Watchlist></div>}></Route>
                 {/*<Route path="*" element={<NotFound></NotFound>}></Route>*/}
             </Routes>
         </Router>
