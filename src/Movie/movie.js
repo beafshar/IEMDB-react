@@ -49,7 +49,6 @@ function Movie() {
 
     function setNewCommentValue(e) {
         setNewComment(e.target.value)
-        console.log(newComment)
     }
 
     function addComment(e) {
@@ -89,7 +88,7 @@ function Movie() {
                                     <img className="image movie" src={movie && movie.image} alt="movie"/>
                                 </div>
                                 <div className="column">
-                                    <button className="button add_to_watchlist" onClick={e => add_movie_to_watchlist(e)} >افزودن به لیست</button>
+                                    <button className="button add_to_watchlist" onClick={e => add_movie_to_watchlist(movie.id)} >افزودن به لیست</button>
                                 </div>
                             </div>
                         </div>
@@ -105,10 +104,10 @@ function Movie() {
                         </div>
                         <div className="column">
                             <div className="rectangle">
-                                <header>8.8</header>
+                                <header>movie.imdbRate</header>
                                 <span className="fa fa-star checked"/>
-                                <p>امتیاز کاربران: 8.2</p>
-                                <p dir="rtl">(23 رای)</p>
+                                <p>امتیاز کاربران: movie.rating</p>
+                                <p dir="rtl">(movie.ratingCount رای)</p>
                             </div>
                         </div>
                     </div>

@@ -25,6 +25,7 @@
     flex-basis: 10em;
     align-items: center;
     justify-content: center;
+    display: none;
 }
 .rightalign {
     width: fit-content;
@@ -37,11 +38,8 @@
     margin-left: 25em;
 }
 .column.side {
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
+    width: 10%;
     align-items: center;
-    width: fit-content;
     justify-content: center;
     margin-right: 40px;
 }
@@ -83,7 +81,6 @@
     background-color: #B12025;
     color: white;
     border-radius: 20px;
-    width: fit-content;
     text-align: center;
     justify-content: center;
     float: right;
