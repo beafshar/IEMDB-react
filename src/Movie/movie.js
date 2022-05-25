@@ -1,6 +1,6 @@
-import './movie.css'
+import css from './movie.css'
 import '../Common/style.css'
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     add_movie_to_watchlist,
     comment_movie,
@@ -21,6 +21,11 @@ function Movie() {
 
     const {id} = useParams();
 
+    useEffect(() => {
+        getData();
+    }, [])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     function getData() {
         get_movie_by_id(id)
             .then(res => {
@@ -78,21 +83,23 @@ function Movie() {
 
     return (
         <div>
-            <div>{getData()}</div>
             <div className="header_avatar" style={movie && {backgroundImage: `url(${movie.coverImage})`}}>
                 <div className="center">
                     <div className="transparent_row first">
-                        <div className="column">
-                            <div className="row">
-                                <div className="column">
+                        <div className={css.column}>
+                            <div className={css.row}>
+                                <div className={css.column}>
                                     <img className="image movie" src={movie && movie.image} alt="movie"/>
                                 </div>
-                                <div className="column">
-                                    <button className="button add_to_watchlist" onClick={e => add_movie_to_watchlist(movie.id)} >افزودن به لیست</button>
+                                <div className={css.column}>
+                                    <button className="button add_to_watchlist"
+                                            onClick={e => add_movie_to_watchlist(movie.id) && navigator("/watchlist")}>افزودن
+                                        به لیست
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div className="column">
+                        <div className={css.column}>
                             <dl>
                                 <dt dir="ltr">{movie && movie.name}</dt>
                                 <dt dir="rtl">کارگردان: {movie && movie.director}</dt>
@@ -102,18 +109,17 @@ function Movie() {
                                 <dt dir="rtl">{movie && movie.summary}</dt>
                             </dl>
                         </div>
-                        <div className="column">
+                        <div className={css.column}>
                             <div className="rectangle">
-                                <header>movie.imdbRate</header>
-                                <span className="fa fa-star checked"/>
-                                <p>امتیاز کاربران: movie.rating</p>
-                                <p dir="rtl">(movie.ratingCount رای)</p>
+                                {/*<header>{movie.imdbRate}</header>*/}
+                                {/*<span className="fa fa-star checked"/>*/}
+                                {/*<p>امتیاز کاربران: {movie.rating}</p>*/}
+                                {/*<p dir="rtl">({movie.ratingCount} رای)</p>*/}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div className="center">
                 <div className="movie_list item">
                     <div className="title">
@@ -142,7 +148,8 @@ function Movie() {
                             <dl>
                                 <dt dir="rtl">دیدگاه خود را اضافه کنید.</dt>
                                 <form name="myForm">
-                                    <input className="comment-text" type="text" onChange={e => setNewCommentValue(e)}/>
+                                    <input className="comment-text" type="text" id="comm"
+                                           onChange={e => setNewCommentValue(e)}/>
                                     <button className="button submit" onClick={e => addComment(e)}>ثبت</button>
                                 </form>
                                 <dt dir="rtl"/>
@@ -152,25 +159,25 @@ function Movie() {
                             <div className="comment">
                                 <dl>
                                     <dt dir="ltr">{item.userEmail}</dt>
-                                        <dt dir="rtl">{item.text}</dt>
-                                        <table>
-                                            <tr>
-                                                <th>
-                                                    <button className="like" onClick={e => likeComment(item.id)}>
-                                                        <i className="fa fa-thumbs-o-up" aria-hidden="true"/>
-                                                    </button>
-                                                </th>
-                                                <th>
-                                                    <button className="dislike" onClick={e => dislikeComment(item.id)}>
-                                                        <i className="fa fa-thumbs-o-down" aria-hidden="true"/>
-                                                    </button>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td>{item.likes}</td>
-                                                <td>{item.dislikes}</td>
-                                            </tr>
-                                        </table>
+                                    <dt dir="rtl">{item.text}</dt>
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                <button className="like" onClick={e => likeComment(item.id)}>
+                                                    <i className="fa fa-thumbs-o-up" aria-hidden="true"/>
+                                                </button>
+                                            </th>
+                                            <th>
+                                                <button className="dislike" onClick={e => dislikeComment(item.id)}>
+                                                    <i className="fa fa-thumbs-o-down" aria-hidden="true"/>
+                                                </button>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>{item.likes}</td>
+                                            <td>{item.dislikes}</td>
+                                        </tr>
+                                    </table>
                                 </dl>
                             </div>
                         )) : null}

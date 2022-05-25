@@ -5,13 +5,13 @@
     margin-top: 5px;
 }
 
-.row {
+.roww {
     flex-direction: row;
     display: flex;
     align-items: center;
 }
 @media (max-width: 800px) {
-    .row {
+    .roww {
         -webkit-flex-direction: column;
         flex-direction: column;
     }
@@ -27,21 +27,23 @@
     justify-content: center;
     display: none;
 }
-.rightalign {
-    width: fit-content;
-    height: auto;
+
+.columnBox {
+    flex: 1;
+    margin: auto;
+    width: 1200px;
     position: center;
     flex-basis: 10em;
-    justify-content: right;
-    float: right;
-    display: flex;
-    margin-left: 25em;
+    align-items: center;
+    justify-content: center;
 }
+
 .column.side {
     width: 10%;
     align-items: center;
     justify-content: center;
     margin-right: 40px;
+    float: right;
 }
 .cards {
     display: flex;
@@ -84,20 +86,22 @@
     text-align: center;
     justify-content: center;
     float: right;
+    width: 150px;
 }
 
 
 .searchBox {
-    flex-direction: row;
+    flex-direction: column;
     background: white;
     border-radius: 10px;
     padding: 0.5em;
     width: 200px;
     direction: rtl;
-    height: 40px;
+    height: 35px;
+    margin-top: 15px;
 }
 
-ul {
+.ul {
     justify-content: center;
     align-content: center;
     margin-top: -5px;
@@ -106,8 +110,6 @@ ul {
 .searchButton {
     display: flex;
     color:  #B12025;
-    width: 25px;
-    height: 20px;
     border: none;
     background: white;
 }
@@ -129,9 +131,10 @@ ul {
     display: flex;
     background-color: white;
     color: black;
+    margin-top: 15px;
     border-radius: 10px;
     width: 200px;
-    height: fit-content;
+    height: 35px;
 }
 .dropdown-content.search {
     justify-content: center;
@@ -153,6 +156,7 @@ ul {
 .material-icons.mag{
     height: fit-content;
     direction: rtl;
+    margin-top: -10px;
 }
 
 .button.filter {
@@ -167,3 +171,27 @@ ul {
     background-color: darkred;
 }
 
+.loader {
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid #3498db;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    margin-top: 300px;
+    justify-content: center;
+    text-align: center;
+    display: block;
+    align-items: center;
+    align-content: center;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

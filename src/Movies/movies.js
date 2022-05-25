@@ -1,9 +1,10 @@
-import './movies.css'
+import css from './movies.css'
 import '../Common/style.css'
 import userlogo from '../Common/user.png';
 import template from '../Common/template.png'
 import React, {useEffect, useState} from "react";
 import {
+    check_login_api,
     filter_movies_by_date,
     filter_movies_by_genre,
     filter_movies_by_name,
@@ -19,18 +20,28 @@ function Movies() {
     const [searchKey, setSearchKey] = useState("");
     const [searchBy, setSearchItem] = useState("1");
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState(false);
 
     useEffect(() => {
         setLoading(true);
+        check_login_api().then(res => {
+            setUser(res.data)
+            console.log(res.data);
+            console.log(user)
+        })
+            .catch(err => {
+            console.log(err);
+        });
         get_movies()
             .then(res => {
                 setMovies(res.data)
                 setLoading(false);
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             });
-    }, []);
+
+    }, [user]);
 
     function sort_by_imdb() {
         setLoading(true);
@@ -112,6 +123,10 @@ function Movies() {
         }
     }
 
+    if(check_login_api() === false){
+        return navigator.push("/login");
+    }
+
     return (
         <div>
             <div className="topnav">
@@ -122,14 +137,14 @@ function Movies() {
                         <a href="#" className="align-right"><img className="align-left" src={userlogo}
                                                                  alt="user"/></a>
                         <div className="dropdown-content nav">
-                            <a onClick={() => navigator(`/login`)}>ورود</a>
-                            <a onClick={() => navigator(`/signup`)}>ثبت‌نام</a>
+                            {/*{console.log(user)}*/}
+                            {user ? (<a onClick={() => navigator(`/watchlist`)}>فیلم‌های من</a>) : (<a onClick={() => navigator(`/login`)}>ورود</a>)}
+                            {user ? (<a onClick={() => navigator(`/logout`)}>خروج</a>) : (<a onClick={() => navigator(`/signup`)}>ثبت‌نام</a>)}
                         </div>
                     </li>
                 </div>
-                <div className="row">
-                    <div className="column">
-                        <div className="rightalign">
+                <div className={css.row}>
+                        <div className="align-right">
                             <div className="dropdown search">
                                 <select className="search-type">
                                     <option onClick={() => set_search_name()}>نام</option>
@@ -138,22 +153,22 @@ function Movies() {
                                 </select>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="searchBox">
-                        <form>
-                            <input className="searchInput" value={searchKey} type="text"
-                                   onChange={e => setSearchKey(e.target.value)}/>
-                        </form>
-                        <button type="submit">
-                            <i class="material-icons mag" onClick={() => search()}>search</i>
-                        </button>
+                        <div className="align-right">
+                            <div className="searchBox">
+                                <form>
+                                    <input className="searchInput" value={searchKey} type="text"
+                                           onChange={e => setSearchKey(e.target.value)}/>
+                                </form>
+                                <button type="submit">
+                                    <i className="material-icons mag" onClick={() => search()}>search</i>
+                                </button>
+                            </div>
                     </div>
                 </div>
             </div>
-            <div className="row">
-                <div className="column">
+            {/*<div className="loader"></div>*/}
+            <div className="roww">
+                <div className={css.column}>
                     {loading ? <div class="spinner-border text-danger" role="status"/> :
                         <div className="cards">
                             <ul>{
@@ -171,7 +186,7 @@ function Movies() {
                         </div>
                     }
                 </div>
-                <div className="column side">
+                <div className={css.column + css.side}>
                     <header dir="rtl">رتبه‌بندی بر اساس:</header>
                     <div className="box">
                         <dl>

@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import template from "../Common/template.png";
 import userlogo from "../Common/user.png";
-import {get_recommendations, get_watchlist} from "../Common/api";
+import {delete_movie, get_movies_imdb, get_recommendations, get_watchlist} from "../Common/api";
 
 function Watchlist() {
     const navigator = useNavigate();
@@ -28,21 +28,10 @@ function Watchlist() {
             })
     }
 
+
     return (
         <div>
             <div>{getData()}</div>
-            <div className="topnav">
-                <a href="#" className="align-left"><img className="align-left" src={template} alt="logo"/></a>
-                <div className="align-right">
-                    <li className="dropdown">
-                        <a href="#" className="align-right"><img className="align-left" src={userlogo} alt="user"/></a>
-                        <div className="dropdown-content nav">
-                            <a onClick={() => navigator(`/login`)}>ورود</a>
-                            <a onClick={() => navigator(`/signup`)}>ثبت‌نام</a>
-                        </div>
-                    </li>
-                </div>
-            </div>
             <div className="column">{
                 movies.length > 0 ? movies.map((item, index) => (
                     <div className="row">
@@ -55,18 +44,6 @@ function Watchlist() {
                             </div>
                         </div>
                         <div className="column">
-                            {item.name}
-                            <div className="row right">
-                                <dl>
-                                    <dt dir="rtl">امتیاز IMDB: {item.imdbRate}</dt>
-                                    <dt dir="rtl">امتیاز کاربران: {item.rating}</dt>
-                                </dl>
-                            </div>
-                        </div>
-                        <div className="column">
-                            <div className="align-right">
-                                <a className="align-right"> <i className="gg-trash fa-10x"></i></a>
-                            </div>
                             <div className="row right">
                                 <dl>
                                     <dl>
@@ -78,25 +55,43 @@ function Watchlist() {
                                 </dl>
                             </div>
                         </div>
+                        <div className="column">
+                            <div className="row right">
+                                <dl>
+                                    <dt dir="rtl">امتیاز IMDB: {item.imdbRate}</dt>
+                                    <dt dir="rtl">امتیاز کاربران: {item.rating}</dt>
+                                </dl>
+                            </div>
+                        </div>
+                        <div className="column">
+                            {item.name}
+                        </div>
+                        <div className="column">
+                            <button className="button filter" dir="rtl"
+                                    onClick={() => delete_movie(item.id)}>
+                                <a className="align-right"> <i className="gg-trash fa-10x"></i></a>
+                            </button>
+                        </div>
                     </div>
                 )) : null}
             </div>
-            <div className="center">{
-                recommended_movies.length > 0 ? recommended_movies.map((item, index) => (
-                    <div className="movie_list item">
-                        <div className="title">
-                            <h2>فیلم‌های پیشنهادی</h2>
-                        </div>
-                        <div className="movie_list">
+            <div className="center">
+                <div className="movie_list item">
+                    <div className="title">
+                        <h2>فیلم‌های پیشنهادی</h2>
+                    </div>
+                    <div className="movie_list">{
+                        recommended_movies.length > 0 ? recommended_movies.map((item, index) => (
+
                             <div className="container">
                                 <a onClick={() => navigator(`/movies/${item.id}`)}>
                                     <img className="image" src={item.image} alt="movie"/>
                                     <div className="overlay">{item.name}</div>
                                 </a>
                             </div>
-                        </div>
+                        )) : null}
                     </div>
-                )) : null}
+                </div>
             </div>
         </div>
     );

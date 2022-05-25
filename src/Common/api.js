@@ -1,5 +1,4 @@
 import axios from "axios";
-
 const server = "http://localhost:8080"
 
 export const login_api = (data) => {
@@ -8,6 +7,10 @@ export const login_api = (data) => {
 
 export const logout_api = () => {
     return axios.get(`${server}/logout`);
+}
+
+export const check_login_api = () => {
+    return axios.get(`${server}/login/check`);
 }
 
 export const signup_api = (data) => {
@@ -86,4 +89,8 @@ export const get_watchlist = () => {
 
 export const get_recommendations = () => {
     return axios.get(`${server}/watchlist/recommendations`)
+}
+
+export const delete_movie = (id) => {
+    return axios.post(`${server}/watchlist/${id}`)
 }
