@@ -80,6 +80,7 @@ function Movies() {
     }
 
     function search() {
+        setLoading(true)
         if (searchKey === "") {
             get_movies()
                 .then(res => {
@@ -96,6 +97,7 @@ function Movies() {
                 .then(res => {
                     setMovies(res.data)
                     setSearchKey("")
+                    setLoading(false);
                 })
                 .catch(err => {
                     console.log(err);
@@ -106,6 +108,7 @@ function Movies() {
                 .then(res => {
                     setMovies(res.data)
                     setSearchKey("")
+                    setLoading(false);
                 })
                 .catch(err => {
                     console.log(err);
@@ -116,15 +119,12 @@ function Movies() {
                 .then(res => {
                     setMovies(res.data)
                     setSearchKey("")
+                    setLoading(false);
                 })
                 .catch(err => {
                     console.log(err);
                 });
         }
-    }
-
-    if(check_login_api() === false){
-        return navigator.push("/login");
     }
 
     return (
@@ -137,7 +137,6 @@ function Movies() {
                         <a href="#" className="align-right"><img className="align-left" src={userlogo}
                                                                  alt="user"/></a>
                         <div className="dropdown-content nav">
-                            {/*{console.log(user)}*/}
                             {user ? (<a onClick={() => navigator(`/watchlist`)}>فیلم‌های من</a>) : (<a onClick={() => navigator(`/login`)}>ورود</a>)}
                             {user ? (<a onClick={() => navigator(`/logout`)}>خروج</a>) : (<a onClick={() => navigator(`/signup`)}>ثبت‌نام</a>)}
                         </div>
@@ -163,47 +162,49 @@ function Movies() {
                                     <i className="material-icons mag" onClick={() => search()}>search</i>
                                 </button>
                             </div>
-                    </div>
-                </div>
-            </div>
-            {/*<div className="loader"></div>*/}
-            <div className="roww">
-                <div className={css.column}>
-                    {loading ? <div class="spinner-border text-danger" role="status"/> :
-                        <div className="cards">
-                            <ul>{
-                                movies.length > 0 ? movies.map((item, index) => (
-                                    <li>
-                                        <div className="container">
-                                            <a onClick={() => navigator(`/movies/${item.id}`)}>
-                                                <img className="image" src={item.image} alt="movie"/>
-                                                <div className="overlay">{item.name}</div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                )) : null}
-                            </ul>
                         </div>
-                    }
-                </div>
-                <div className={css.column + css.side}>
-                    <header dir="rtl">رتبه‌بندی بر اساس:</header>
-                    <div className="box">
-                        <dl>
-                            <dt>
-                                <button className="button filter" dir="rtl"
-                                        onClick={() => sort_by_date()}>تاریخ
-                                </button>
-                            </dt>
-                            <dt>
-                                <button className="button filter" dir="rtl"
-                                        onClick={() => sort_by_imdb()}>امتیاز imdb
-                                </button>
-                            </dt>
-                        </dl>
-                    </div>
                 </div>
             </div>
+            {loading ?
+                (<div className="loader"></div>) :
+                (<div className="roww">
+                    <div className={css.column}>
+                        {loading ? <div class="spinner-border text-danger" role="status"/> :
+                            <div className="cards">
+                                <ul>{
+                                    movies.length > 0 ? movies.map((item, index) => (
+                                        <li>
+                                            <div className="container">
+                                                <a onClick={() => navigator(`/movies/${item.id}`)}>
+                                                    <img className="image" src={item.image} alt="movie"/>
+                                                    <div className="overlay">{item.name}</div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    )) : null}
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                    <div className={css.column + css.side}>
+                        <header dir="rtl">رتبه‌بندی بر اساس:</header>
+                        <div className="box">
+                            <dl>
+                                <dt>
+                                    <button className="button filter" dir="rtl"
+                                            onClick={() => sort_by_date()}>تاریخ
+                                    </button>
+                                </dt>
+                                <dt>
+                                    <button className="button filter" dir="rtl"
+                                            onClick={() => sort_by_imdb()}>امتیاز imdb
+                                    </button>
+                                </dt>
+                            </dl>
+                        </div>
+                    </div>
+                </div>)
+            }
         </div>
     )
 }
