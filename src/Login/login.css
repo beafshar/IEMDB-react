@@ -107,3 +107,9 @@ input::-moz-placeholder {
         padding: 40px 15px 15px 15px
     }
 }
+
+.text_wrong {
+    color: darkred;
+    text-align: right;
+    padding-right: 10px;
+}

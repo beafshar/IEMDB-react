@@ -9,12 +9,18 @@ function Login() {
     const navigator = useNavigate();
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState(false)
 
     function submitName(e) {
         e.preventDefault();
         login_api({username, password})
             .then(res => {
                 console.log(res);
+                if(res.data.length === 0) {
+                    setError(true)
+                    navigator("/login")
+                    return;
+                }
                 setUsername("")
                 setPassword("")
                 navigator("/movies")
@@ -43,6 +49,10 @@ function Login() {
                     placeholder="رمز عبور"/>
                 </div>
                 <button className="btn mt-3" onClick={e => submitName(e)}>ورود</button>
+                <br></br>
+                <br></br>
+                <br></br>
+                {error && <div className="text_wrong">نام کاربری یا رمز عبور اشتباه است</div>}
             </form>
         </div>
     )

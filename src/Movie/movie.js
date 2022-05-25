@@ -2,12 +2,12 @@ import css from './movie.css'
 import '../Common/style.css'
 import React, {useEffect, useState} from "react";
 import {
-    add_movie_to_watchlist,
+    add_movie_to_watchlist, check_login_api,
     comment_movie,
     dislike_comment,
     get_comments,
     get_movie_actors,
-    get_movie_by_id,
+    get_movie_by_id, get_movies,
     like_comment
 } from '../Common/api'
 import {useNavigate, useParams} from "react-router-dom";
@@ -19,6 +19,18 @@ function Movie() {
     const [actors, setActors] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState(false);
+
+    useEffect(() => {
+        check_login_api().then(res => {
+            setUser(res.data)
+            console.log(res.data);
+            console.log(user)
+        })
+            .catch(err => {
+                console.log(err);
+            });
+    }, [user]);
 
     const {id} = useParams();
 
@@ -97,10 +109,11 @@ function Movie() {
                                             <img className="image movie" src={movie && movie.image} alt="movie"/>
                                         </div>
                                         <div className={css.column}>
+                                            { user &&
                                             <button className="button add_to_watchlist"
                                                     onClick={e => add_movie_to_watchlist(movie.id) && navigator("/watchlist")}>افزودن
                                                 به لیست
-                                            </button>
+                                            </button>}
                                         </div>
                                     </div>
                                 </div>
@@ -149,6 +162,7 @@ function Movie() {
                                 <h2>دیدگاه‌ها</h2>
                             </div>
                             <div className="transparent_row seccond">
+                                {user &&
                                 <div className="comment">
                                     <dl>
                                         <dt dir="rtl">دیدگاه خود را اضافه کنید.</dt>
@@ -159,7 +173,7 @@ function Movie() {
                                         </form>
                                         <dt dir="rtl"/>
                                     </dl>
-                                </div>
+                                </div>}
                                 {comments.length > 0 ? comments.map((item, index) => (
                                     <div className="comment">
                                         <dl>

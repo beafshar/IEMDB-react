@@ -96,7 +96,6 @@ function Movies() {
             filter_movies_by_name(searchKey)
                 .then(res => {
                     setMovies(res.data)
-                    setSearchKey("")
                     setLoading(false);
                 })
                 .catch(err => {
@@ -107,7 +106,6 @@ function Movies() {
             filter_movies_by_genre(searchKey)
                 .then(res => {
                     setMovies(res.data)
-                    setSearchKey("")
                     setLoading(false);
                 })
                 .catch(err => {
@@ -118,7 +116,6 @@ function Movies() {
             filter_movies_by_date(searchKey)
                 .then(res => {
                     setMovies(res.data)
-                    setSearchKey("")
                     setLoading(false);
                 })
                 .catch(err => {

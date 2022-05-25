@@ -40,7 +40,7 @@ function Actor() {
     return (
         <div>
             {loading ? (<div className="loader"></div>) :
-                (<div className="row">
+                (<div className="roww">
                     <div className={`${css.column} ${css.side}`}>
                         <img src={actor && actor.image} alt="logo"/>
                     </div>
