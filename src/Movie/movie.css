@@ -82,17 +82,10 @@
     padding: 50px 15px;
 }
 
-.rectangle header{
-    font-size: 40px;
-}
-.rectangle p{
-    font-size: 14px;
-}
 .checked {
     color: orange;
 
 }
-
 
 .comment {
     flex-direction: column;
@@ -216,4 +209,19 @@ button.add_to_watchlist{
     border-radius: 50px;
     align-content: center;
     align-items: center;
+}
+
+.textitle {
+    color: #292929;
+    text-align: center;
+    padding-right: 10px;
+    font-size: 40px;
+}
+
+.textin {
+    color: white;
+    text-align: center;
+    padding-right: 10px;
+    font-size: 20px;
+    direction: rtl;
 }

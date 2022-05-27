@@ -64,7 +64,7 @@ export const add_movie_to_watchlist = (id) => {
 }
 
 export const rate_movie = (id, rating) => {
-    return axios.post(`${server}/movies/${id}/rate`, {rating: rating})
+    return axios.post(`${server}/movies/${id}/rate/${rating}`)
 }
 
 export const get_comments = (id) => {

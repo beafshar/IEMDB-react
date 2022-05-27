@@ -8,9 +8,11 @@ import {
     get_comments,
     get_movie_actors,
     get_movie_by_id, get_movies,
-    like_comment
+    like_comment, rate_movie
 } from '../Common/api'
 import {useNavigate, useParams} from "react-router-dom";
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 
 function Movie() {
     const navigator = useNavigate();
@@ -20,11 +22,11 @@ function Movie() {
     const [newComment, setNewComment] = useState('');
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(false);
+    const [rateValue, setRateValue] = useState(0);
 
     useEffect(() => {
         check_login_api().then(res => {
             setUser(res.data)
-            console.log(res.data);
             console.log(user)
         })
             .catch(err => {
@@ -55,7 +57,6 @@ function Movie() {
             })
             .catch(e => {
                 console.log(e)
-                console.log(e.response)
             })
         get_comments(id)
             .then(response => {
@@ -96,6 +97,13 @@ function Movie() {
             });
     }
 
+    function rateMovie(value) {
+        rate_movie(id, value)
+            .then(r => {
+                getData()
+            });
+    }
+
     return (
         <div>
             {loading ? (<div className="loader"></div>) :
@@ -129,10 +137,14 @@ function Movie() {
                                 </div>
                                 <div className={css.column}>
                                     <div className="rectangle">
-                                        {/*<header>{movie.imdbRate}</header>*/}
-                                        {/*<span className="fa fa-star checked"/>*/}
-                                        {/*<p>امتیاز کاربران: {movie.rating}</p>*/}
-                                        {/*<p dir="rtl">({movie.ratingCount} رای)</p>*/}
+                                        <div className="textitle">{movie.imdbRate}</div>
+                                        <br/>
+                                        <Stack spacing={1}>
+                                            <Rating name="half-rating" defaultValue={movie && movie.rating} precision={0.5}
+                                                    onChange={(e,newValue) => rateMovie(newValue)}/>
+                                        </Stack>
+                                        <div className="textin">امتیاز کاربران: {movie.rating}</div>
+                                        <div className="textin"> ({movie.ratingCount} رای)</div>
                                     </div>
                                 </div>
                             </div>

@@ -26,7 +26,6 @@ function Movies() {
         setLoading(true);
         check_login_api().then(res => {
             setUser(res.data)
-            console.log(res.data);
             console.log(user)
         })
             .catch(err => {
@@ -127,11 +126,11 @@ function Movies() {
     return (
         <div>
             <div className="topnav">
-                <a href="#" className="align-left"><img className="align-left" src={template}
+                <a className="align-left"><img className="align-left" src={template}
                                                         alt="logo"/></a>
                 <div className="align-right">
                     <li className="dropdown">
-                        <a href="#" className="align-right"><img className="align-left" src={userlogo}
+                        <a className="align-right"><img className="align-left" src={userlogo}
                                                                  alt="user"/></a>
                         <div className="dropdown-content nav">
                             {user ? (<a onClick={() => navigator(`/watchlist`)}>فیلم‌های من</a>) : (<a onClick={() => navigator(`/login`)}>ورود</a>)}
@@ -163,10 +162,10 @@ function Movies() {
                 </div>
             </div>
             {loading ?
-                (<div className="loader"></div>) :
+                (<div className="loader"/>) :
                 (<div className="roww">
                     <div className={css.column}>
-                        {loading ? <div class="spinner-border text-danger" role="status"/> :
+                        {loading ? <div className="spinner-border text-danger" role="status"/> :
                             <div className="cards">
                                 <ul>{
                                     movies.length > 0 ? movies.map((item, index) => (
