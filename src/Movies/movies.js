@@ -71,6 +71,7 @@ function Movies() {
     }
 
     function set_search_genre() {
+        console.log("genre")
         setSearchItem("2");
     }
 

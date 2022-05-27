@@ -2,13 +2,15 @@ import css from './movie.css'
 import '../Common/style.css'
 import React, {useEffect, useState} from "react";
 import {
-    add_movie_to_watchlist, check_login_api,
+    add_movie_to_watchlist,
+    check_login_api,
     comment_movie,
     dislike_comment,
     get_comments,
     get_movie_actors,
-    get_movie_by_id, get_movies,
-    like_comment, rate_movie
+    get_movie_by_id,
+    like_comment,
+    rate_movie
 } from '../Common/api'
 import {useNavigate, useParams} from "react-router-dom";
 import Rating from '@mui/material/Rating';
@@ -98,7 +100,7 @@ function Movie() {
     }
 
     function rateMovie(value) {
-        rate_movie(id, value)
+        rate_movie(id, value * 2)
             .then(r => {
                 getData()
             });
@@ -137,14 +139,15 @@ function Movie() {
                                 </div>
                                 <div className={css.column}>
                                     <div className="rectangle">
-                                        <div className="textitle">{movie.imdbRate}</div>
+                                        <div className="textitle">{movie && movie.imdbRate}</div>
                                         <br/>
-                                        <Stack spacing={1}>
-                                            <Rating name="half-rating" defaultValue={movie && movie.rating} precision={0.5}
-                                                    onChange={(e,newValue) => rateMovie(newValue)}/>
-                                        </Stack>
-                                        <div className="textin">امتیاز کاربران: {movie.rating}</div>
-                                        <div className="textin"> ({movie.ratingCount} رای)</div>
+                                        {user &&
+                                            <Stack spacing={1}>
+                                                <Rating name="half-rating" value={movie && movie.rating} precision={0.5}
+                                                        onChange={(e, newValue) => rateMovie(newValue)}/>
+                                            </Stack>}
+                                        <div className="textin">امتیاز کاربران: {movie && movie.rating}</div>
+                                        <div className="textin"> ({movie && movie.ratingCount} رای)</div>
                                     </div>
                                 </div>
                             </div>
