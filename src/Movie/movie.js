@@ -194,25 +194,29 @@ function Movie() {
                                         <dl>
                                             <dt dir="ltr">{item.userEmail}</dt>
                                             <dt dir="rtl">{item.text}</dt>
-                                            <table>
-                                                <tr>
-                                                    <th>
-                                                        <button className="like" onClick={e => likeComment(item.id)}>
-                                                            <i className="fa fa-thumbs-o-up" aria-hidden="true"/>
-                                                        </button>
-                                                    </th>
-                                                    <th>
-                                                        <button className="dislike"
-                                                                onClick={e => dislikeComment(item.id)}>
-                                                            <i className="fa fa-thumbs-o-down" aria-hidden="true"/>
-                                                        </button>
-                                                    </th>
-                                                </tr>
-                                                <tr>
-                                                    <td>{item.likes}</td>
-                                                    <td>{item.dislikes}</td>
-                                                </tr>
-                                            </table>
+                                            {user &&
+                                                <table>
+                                                    <tr>
+                                                        <th>
+                                                            <button className="like"
+                                                                    onClick={e => likeComment(item.id)}>
+                                                                <i className="fa fa-thumbs-o-up" aria-hidden="true"/>
+                                                            </button>
+                                                        </th>
+                                                        <th>
+                                                            <button className="dislike"
+                                                                    onClick={e => dislikeComment(item.id)}>
+                                                                <i className="fa fa-thumbs-o-down" aria-hidden="true"/>
+                                                            </button>
+                                                        </th>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>{item.likes}</td>
+                                                        <td>{item.dislikes}</td>
+                                                    </tr>
+                                                </table>
+                                            }
                                         </dl>
                                     </div>
                                 )) : null}
