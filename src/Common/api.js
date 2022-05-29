@@ -94,3 +94,7 @@ export const get_recommendations = () => {
 export const delete_movie = (id) => {
     return axios.post(`${server}/watchlist/${id}`)
 }
+
+export const send_code_to_backend = (code) => {
+    return axios.get(`${server}/callback/${code}`)
+}
