@@ -2,7 +2,7 @@ import '../Common/style.css'
 import {useState} from "react";
 import template from '../Common/template.png'
 import {signup_api} from "../Common/api";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function Signup(){
     const navigator = useNavigate();
@@ -59,9 +59,6 @@ function Signup(){
                                                                                                 placeholder="تاریخ تولد"/>
                 </div>
                 <button className="btn mt-3" onClick={e => submitData(e)}>ثبت نام</button>
-                {/*"https://github.com/login/oauth/authorize?client_id=f6eb4e409157aef614cd&scope=user"*/}
-                {/* eslint-disable-next-line no-restricted-globals */}
-                {/*<button className="btn mt-3" onClick={() => window.open("https://github.com/login/oauth/authorize?client_id=f6eb4e409157aef614cd&scope=user", "_blank")}>Signup with github</button>*/}
                 <span className="btn span-btn mt-3"><a href={"https://github.com/login/oauth/authorize?client_id=f6eb4e409157aef614cd&scope=user"}>Signup with github</a></span>
             </form>
         </div>

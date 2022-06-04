@@ -13,10 +13,6 @@ import Callback from "./Callback/callback";
 
 function App() {
 
-    useEffect(() => {
-        console.log("doodool")
-    }, []);
-
     return (
         <Router>
             <Routes>
