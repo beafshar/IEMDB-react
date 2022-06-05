@@ -15,14 +15,12 @@ function Login() {
         e.preventDefault();
         login_api({username, password})
             .then(res => {
-                console.log(res);
                 if(res.data.length === 0) {
                     setError(true)
                     navigator("/login")
                     return;
                 }
-                setUsername("")
-                setPassword("")
+                localStorage.setItem("token", res.data)
                 navigator("/movies")
             })
             .catch(err => {

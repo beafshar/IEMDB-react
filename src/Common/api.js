@@ -1,12 +1,14 @@
 import axios from "axios";
 const server = "http://localhost:8080"
 
+const token = localStorage.getItem("token");
+
 export const login_api = (data) => {
     return axios.post(`${server}/login`, {...data});
 }
 
 export const logout_api = () => {
-    return axios.get(`${server}/logout`);
+    return axios.get(`${server}/logout`, {headers: {Authorization: `Bearer ${token}`}});
 }
 
 export const check_login_api = () => {
@@ -84,15 +86,15 @@ export const dislike_comment = (id, comment_id) => {
 }
 
 export const get_watchlist = () => {
-    return axios.get(`${server}/watchlist`)
+    return axios.get(`${server}/watchlist`, {headers: {Authorization: `Bearer ${token}`}})
 }
 
 export const get_recommendations = () => {
-    return axios.get(`${server}/watchlist/recommendations`)
+    return axios.get(`${server}/watchlist/recommendations`, {headers: {Authorization: `Bearer ${token}`}})
 }
 
 export const delete_movie = (id) => {
-    return axios.post(`${server}/watchlist/${id}`)
+    return axios.post(`${server}/watchlist/${id}`, {},{headers: {Authorization: `Bearer ${token}`}})
 }
 
 export const send_code_to_backend = (code) => {

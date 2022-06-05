@@ -9,9 +9,8 @@ function Callback(){
 
     useEffect(() => {
         send_code_to_backend(code).then(res => {
-            console.log(res);
-            console.log(res);
             if(res.status === 200){
+                localStorage.setItem("token", res.data);
                 window.location.href = '/movies';
             }
         })

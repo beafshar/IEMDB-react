@@ -37,7 +37,7 @@ function Watchlist() {
                 console.log(e)
             })
 
-    }, [movies, recommended_movies])
+    }, [])
 
     return (
         <div>

@@ -1,7 +1,6 @@
-import {useEffect, useState} from "react";
-import {login_api, logout_api} from "../Common/api";
+import {useEffect} from "react";
+import {logout_api} from "../Common/api";
 import {useNavigate} from "react-router-dom";
-
 
 function Logout() {
     const navigator = useNavigate();
@@ -9,6 +8,7 @@ function Logout() {
    useEffect(() => {
        logout_api()
            .then(() => {
+               localStorage.setItem("token", null);
                navigator("/login");
            })
            .catch(() => {
