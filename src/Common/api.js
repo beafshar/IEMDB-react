@@ -1,5 +1,5 @@
 import axios from "axios";
-const server = "http://localhost:8080"
+const server = "http://87.247.187.217:31010"
 
 export const login_api = (data) => {
     return axios.post(`${server}/login`, {...data});
