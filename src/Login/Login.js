@@ -38,7 +38,7 @@ function Login() {
                     type="text"
                     name="userName"
                     id="userName"
-                    placeholder="ایمیل"/>
+                    placeholder="ایمیلzdfسیسب"/>
                 </div>
                 <div className="form-field d-flex"> <input
                     onChange={e => setPassword(e.target.value)}
